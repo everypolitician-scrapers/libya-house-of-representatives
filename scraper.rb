@@ -24,6 +24,7 @@ def scrape_list(url)
       area_ar: tds[4].text.strip,
       area: tds[5] ? tds[5].text.strip : '',
       image: tds[1].css('img/@src').text,
+      party: "Independent", # no parties allowed
       term: 1,
       source: url,
     }
