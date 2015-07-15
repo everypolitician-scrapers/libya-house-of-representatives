@@ -28,10 +28,13 @@ def scrape_list(url)
       term: 1,
       source: url,
     }
-    if data[:name].include? 'eplaced by'
+
+    if data[:name].include?('eplaced by') || data[:name].include?('Excluded')
       data[:end_date] = '2014-08-04'
-      data[:name], data[:end_reason] = data[:name].split("\r\n", 2)
+      data[:name], reason = data[:name].split("\r\n", 2)
+      data[:end_reason] = reason.lines.map(&:chomp).join(" ").gsub(/[[:space:]]+/, ' ')
     end
+    data[:name].gsub!(/[[:space:]]+/, ' ')
     puts data
     ScraperWiki.save_sqlite([:name, :term], data)
   end
