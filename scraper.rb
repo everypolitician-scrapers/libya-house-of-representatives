@@ -40,11 +40,4 @@ def scrape_list(url)
   end
 end
 
-term = {
-  id: '1',
-  name: '1st House of Representatives',
-  start_date: '2014-08-04',
-}
-ScraperWiki.save_sqlite([:id], term, 'terms')
-
 scrape_list('https://www.temehu.com/house-of-representatives.htm')
